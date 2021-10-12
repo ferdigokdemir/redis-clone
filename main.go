@@ -8,6 +8,7 @@ import (
 var logger *log.Logger
 
 func init() {
+	// Set Environment Variables
 	os.Setenv("PORT", "8080")
 	os.Setenv("DATABASE_SAVE_INTERVAL_SECONDS", "60")
 	logger = log.New(os.Stdout, "http: ", log.LstdFlags)

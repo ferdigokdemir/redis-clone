@@ -1,0 +1,7 @@
+{
+    "name": "in_memory_database",
+    "version": "0.1.0",
+    "description": "Api Documentation.",
+    "title": "In Memory Database API Documentation",
+    "url" : "http://localhost:8080"
+  }
