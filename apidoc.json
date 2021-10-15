@@ -3,5 +3,6 @@
     "version": "0.1.0",
     "description": "Api Documentation.",
     "title": "In Memory Database API Documentation",
-    "url" : "http://localhost:8080"
+    "url" : "http://localhost:8080/api/v1",
+    "sampleUrl": "http://localhost:8080/api/v1"
   }
