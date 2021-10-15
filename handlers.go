@@ -15,7 +15,7 @@ type Item struct {
 
 /**
  * @api {post} /getItem Request Item by Key
- * @apiName GetItem
+ * @apiName GetItemHandler
  * @apiGroup Item
  *
  * @apiBody {String} key Key of the item to get
@@ -33,16 +33,13 @@ type Item struct {
  * @apiError KeyNotFound Key not found
  *
  * @apiErrorExample Error-Response:
- *     HTTP/1.1 404 Not Found
+ *     HTTP/1.1
  *     {
  *       "error": "KeyNotFound"
  *     }
  */
-
-func GetHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Headers", "Content-Type,access-control-allow-origin, access-control-allow-headers")
+func GetItemHandler(w http.ResponseWriter, r *http.Request) {
+	EnableCors(&w)
 	LogRequest(r)
 	var item Item
 	json.NewDecoder(r.Body).Decode(&item)
@@ -54,7 +51,35 @@ func GetHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func SetHandler(w http.ResponseWriter, r *http.Request) {
+/**
+ * @api {post} /setItem Save Item
+ * @apiName SetItemHandler
+ * @apiGroup Item
+ *
+ * @apiBody {String} key Key of the item to set
+ * @apiBody {String} value Value of the item to set
+ *
+ * @apiSuccess {String} success Status of the operation
+ * @apiSuccess {String} data Value of the item
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *       "success": true,
+ *       "data": null
+ *     }
+ *
+ * @apiError SetItemError Item could not be set
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1
+ *     {
+ *	 	 "success": false,
+ *       "error": "SetItemError"
+ *     }
+ */
+func SetItemHandler(w http.ResponseWriter, r *http.Request) {
+	EnableCors(&w)
 	LogRequest(r)
 	var item Item
 	json.NewDecoder(r.Body).Decode(&item)
@@ -62,7 +87,32 @@ func SetHandler(w http.ResponseWriter, r *http.Request) {
 	SuccessResponse(w, nil)
 }
 
-func FlushHandler(w http.ResponseWriter, r *http.Request) {
+/**
+ * @api {post} /flushItems Flush all items
+ * @apiName FlushItemsHandler
+ * @apiGroup Item
+ *
+ * @apiSuccess {String} success Status of the operation
+ * @apiSuccess {String} data Value of the operation
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *       "success": true,
+ *       "data": null
+ *     }
+ *
+ * @apiError FlushItemsError Items could not be flushed
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1
+ *     {
+ *	 	 "success": false,
+ *       "error": "FlushItemsError"
+ *     }
+ */
+func FlushItemsHandler(w http.ResponseWriter, r *http.Request) {
+	EnableCors(&w)
 	LogRequest(r)
 	data = make(map[string]string)
 	err := os.Remove("db.json")
@@ -74,9 +124,9 @@ func FlushHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func StartHttpRouter() {
-	http.HandleFunc("/api/v1/getItem", GetHandler)
-	http.HandleFunc("/api/v1/setItem", SetHandler)
-	http.HandleFunc("/api/v1/flushDatabase", FlushHandler)
+	http.HandleFunc("/api/v1/getItem", GetItemHandler)
+	http.HandleFunc("/api/v1/setItem", SetItemHandler)
+	http.HandleFunc("/api/v1/flushItems", FlushItemsHandler)
 	if err := http.ListenAndServe(":"+os.Getenv("PORT"), nil); err != nil {
 		panic(err)
 	}
@@ -93,4 +143,13 @@ func ErrorResponse(w http.ResponseWriter, err string) {
 
 func SuccessResponse(w http.ResponseWriter, data interface{}) {
 	json.NewEncoder(w).Encode(map[string]interface{}{"success": true, "data": data})
+}
+
+func EnableCors(w *http.ResponseWriter) {
+	cors := os.Getenv("ENABLE_CORS")
+	if cors == "true" {
+		(*w).Header().Set("Access-Control-Allow-Origin", "*")
+		(*w).Header().Set("Access-Control-Allow-Methods", "POST")
+		(*w).Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
+	}
 }
