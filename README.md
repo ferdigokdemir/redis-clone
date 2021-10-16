@@ -40,6 +40,13 @@ go build
 docker-compose up
 ```
 
+### How to generate Api Documentation
+```bash
+npm install apidoc -g
+apidoc -i ./ -o apidoc
+```
+
+
 ## Usage
 
 ### Get Item - <sub><sup>This method for getting item from memory</sub></sup>
