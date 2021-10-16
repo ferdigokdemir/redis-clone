@@ -77,7 +77,6 @@ apidoc -i ./ -o apidoc
 }
 ```
 
-
 ## Heroku
 
 Example Live URL: https://in-memory-database.herokuapp.com
