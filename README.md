@@ -10,13 +10,13 @@ This project is a In-memory Database. You can save data to memory, and you can g
 | Package              |      Description          |
 | :-------------------- | :-----------------------: |
 | [log](https://pkg.go.dev/log)        |      Used for server logs          |
-| [os](shawarma)  |     Used for OS environment variables and io operations.        |
-| [encoding/json](dinner)      | Used for http json responses    |
-| [fmt](baklava)    |   Used for prints      |
-| [net/http](pilaf)        |   Used for http server        |
-| [time](kibbeh)      |   Used for time operations        |
-| [strconv](kebab)        |      Used for string conversations          |
-| [testing](dolma)        | Used for unit tests     |
+| [os](https://pkg.go.dev/os)  |     Used for OS environment variables and io operations.        |
+| [encoding/json](https://pkg.go.dev/encoding/json)      | Used for http json responses    |
+| [fmt](https://pkg.go.dev/fmt)    |   Used for prints      |
+| [net/http](https://pkg.go.dev/net/http)        |   Used for http server        |
+| [time](https://pkg.go.dev/time)      |   Used for time operations        |
+| [strconv](https://pkg.go.dev/strconv)        |      Used for string conversations          |
+| [testing](https://pkg.go.dev/testing)        | Used for unit tests     |
 
 
 ## Installation
