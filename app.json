@@ -1,0 +1,6 @@
+{
+    "name": "In Memory Database",
+    "description": "Key value database written in golang",
+    "repository": "https://github.com/ferdigokdemir/in-memory-database",
+    "keywords": ["golang", "memory-database"]
+  }
