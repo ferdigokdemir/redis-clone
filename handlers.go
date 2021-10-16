@@ -134,7 +134,14 @@ func FlushItemsHandler(w http.ResponseWriter, r *http.Request) {
 	SuccessResponse(w, nil)
 }
 
+func HomeHandler(w http.ResponseWriter, r *http.Request) {
+	EnableCors(&w)
+	LogRequest(r)
+	SuccessResponse(w, "Welcome to the In-Memory-Database API")
+}
+
 func StartHttpRouter() {
+	http.HandleFunc("/", HomeHandler)
 	http.HandleFunc("/api/v1/getItem", GetItemHandler)
 	http.HandleFunc("/api/v1/setItem", SetItemHandler)
 	http.HandleFunc("/api/v1/flushItems", FlushItemsHandler)
