@@ -1,5 +1,5 @@
 # Welcome to In-Memory Database
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Go](https://github.com/ferdigokdemir/in-memory-database/actions/workflows/github-actions-build.yml/badge.svg)](https://github.com/ferdigokdemir/in-memory-database/actions/workflows/github-actions-build.yml)
 
 
 This project is a In-memory Database. You can save data to memory, and you can get it faster. Written using Golang and i use only standart libs.
