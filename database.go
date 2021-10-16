@@ -29,6 +29,8 @@ func SaveDatabase() error {
 		db, _ := json.Marshal(data)
 		os.WriteFile("db.json", db, 0644)
 		operation <- "DATABASE_SAVED"
+		// if database save completed, i can stop saving database with channel operation, this good for testing
+		// look at the database_test.go
 		if o := <-operation; o == "STOP_DATABASE_SAVING" {
 			println("Stopping database saving")
 			ticker.Stop()
