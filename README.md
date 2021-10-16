@@ -80,7 +80,9 @@ apidoc -i ./ -o apidoc
 
 ## Heroku
 
-Live URL: https://in-memory-database.herokuapp.com
+Example Live URL: https://in-memory-database.herokuapp.com
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 
 ## Credits
