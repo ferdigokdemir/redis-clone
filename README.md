@@ -9,4 +9,4 @@
 ## License
 
 The MIT License (MIT).
-Please see [License File](https://github.com/ferdigokdemir/in-memory-database/blob/master/LICENSE.md) for more information.
+Please see [License File](https://github.com/ferdigokdemir/in-memory-database/blob/main/LICENSE.md) for more information.
