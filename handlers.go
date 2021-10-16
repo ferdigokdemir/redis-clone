@@ -125,8 +125,8 @@ func SetItemHandler(w http.ResponseWriter, r *http.Request) {
 func FlushItemsHandler(w http.ResponseWriter, r *http.Request) {
 	EnableCors(&w)
 	LogRequest(r)
-	data = make(map[string]string)
-	err := os.Remove("db.json")
+
+	err := RemoveDatabase()
 	if err != nil {
 		ErrorResponse(w, err.Error())
 		return
