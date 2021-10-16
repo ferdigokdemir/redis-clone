@@ -46,9 +46,9 @@ func GetItemHandler(w http.ResponseWriter, r *http.Request) {
 	if value, ok := data[item.Key]; ok {
 		item.Value = value
 		SuccessResponse(w, item)
-	} else {
-		ErrorResponse(w, "KeyNotFound")
+		return
 	}
+	ErrorResponse(w, "KeyNotFound")
 }
 
 /**
@@ -82,7 +82,18 @@ func SetItemHandler(w http.ResponseWriter, r *http.Request) {
 	EnableCors(&w)
 	LogRequest(r)
 	var item Item
-	json.NewDecoder(r.Body).Decode(&item)
+	err := json.NewDecoder(r.Body).Decode(&item)
+
+	if err != nil {
+		ErrorResponse(w, "SetItemError")
+		return
+	}
+
+	if item.Key == "" || item.Value == "" {
+		ErrorResponse(w, "SetItemError")
+		return
+	}
+
 	data[item.Key] = item.Value
 	SuccessResponse(w, nil)
 }
@@ -118,15 +129,16 @@ func FlushItemsHandler(w http.ResponseWriter, r *http.Request) {
 	err := os.Remove("db.json")
 	if err != nil {
 		ErrorResponse(w, err.Error())
-	} else {
-		SuccessResponse(w, nil)
+		return
 	}
+	SuccessResponse(w, nil)
 }
 
 func StartHttpRouter() {
 	http.HandleFunc("/api/v1/getItem", GetItemHandler)
 	http.HandleFunc("/api/v1/setItem", SetItemHandler)
 	http.HandleFunc("/api/v1/flushItems", FlushItemsHandler)
+	fmt.Println("Server starting on port " + os.Getenv("PORT"))
 	if err := http.ListenAndServe(":"+os.Getenv("PORT"), nil); err != nil {
 		panic(err)
 	}
