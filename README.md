@@ -3,7 +3,7 @@
 
 
 
-This project is a In-memory Database. You can save data to memory, and you can get it faster. Written using Golang and i use only standart libs.
+This project is an In-memory Database. You can save data to memory, and you can get it faster. Written using Golang and i use only standart libs.
 
 
 ## Whick packages used?
